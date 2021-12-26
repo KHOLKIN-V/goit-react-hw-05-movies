@@ -6,13 +6,13 @@ import cs from "./HomeView.module.css";
 
 const HomeView = () => {
   const [movies, setMovies] = useState([]);
-  const [err, setErr] = useState(null);
   const [load, setLoad] = useState(false);
 
   useEffect(() => {
+    setLoad(!load);
     fetchTrend()
       .then((data) => setMovies(data))
-      .catch((err) => toast.error("Ошибочка, извините пожалуйста"));
+      .catch((error) => toast.error("Ошибочка, извините пожалуйста"));
   }, []);
 
   return (
@@ -20,10 +20,18 @@ const HomeView = () => {
       {load && <h2>Загружаю, подождите, умоляю...</h2>}
       {movies && (
         <ul>
-          {movies.map((movie) => (
-            <li className={cs.Item} key={movie.id}>
-              <Link className={cs.Link} to={`movies/${movie.id}`}>
-                {movie.name ? movie.name : movie.title}
+          {movies.map(({ id, title, poster_path }) => (
+            <li className={cs.Item} key={id}>
+              <Link className={cs.Link} to={`movies/${id}`}>
+                <img
+                  src={
+                    poster_path
+                      ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+                      : `noImage`
+                  }
+                  alt={title}
+                />
+                <p className={cs.title}>{title}</p>
               </Link>
             </li>
           ))}

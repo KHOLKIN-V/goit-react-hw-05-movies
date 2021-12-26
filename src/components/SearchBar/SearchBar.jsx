@@ -7,11 +7,11 @@ import cs from "./SearchBar.module.css";
 export default function Searchbar({ onSubmit }) {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const imageChange = (e) => {
+  const movieChange = (e) => {
     setSearchQuery(e.target.value.toLowerCase());
   };
 
-  const imageSubmit = (e) => {
+  const movieSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim() === "") {
       toast.warn("Введите запрос!", {
@@ -31,7 +31,7 @@ export default function Searchbar({ onSubmit }) {
 
   return (
     <>
-      <form className={cs.SearchForm} onSubmit={imageSubmit}>
+      <form className={cs.SearchForm} onSubmit={movieSubmit}>
         <button type="submit" className={cs.SearchFormBtn}>
           <span className={cs.SearchFormBtnLabel}>Search</span>
         </button>
@@ -42,13 +42,13 @@ export default function Searchbar({ onSubmit }) {
           autoComplete="off"
           autoFocus
           placeholder="Search images and photos"
-          onChange={imageChange}
+          onChange={movieChange}
         />
       </form>
     </>
   );
 }
 
-Searchbar.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
+// Searchbar.propTypes = {
+//   onSubmit: PropTypes.func.isRequired,
+// };

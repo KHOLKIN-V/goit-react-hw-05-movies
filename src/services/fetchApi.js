@@ -10,22 +10,22 @@ export const fetchTrend = () => {
     .then(r => r.data.results);
 };
 
-export const fetchMovie= () => {
-    return axios.get(`${BASE_URL}genre/movie/list?api_key=${KEY}&language=${language}`)
+export const fetchMovie = (movId) => {
+    return axios.get(`${BASE_URL}movie/${movId}?api_key=${KEY}`)
+    .then((r) => r.data);
+};
+
+export const fetchCast = (movId) => {
+    return axios.get(`${BASE_URL}/movie/${movId}/credits?api_key=${KEY}`)
+    .then(r => r.data.cast);
+};
+
+export const fetchReviews = (movId) => {
+    return axios.get(`${BASE_URL}/movie/${movId}/reviews?api_key=${KEY}`)
     .then(r => r.data.results);
 };
 
-export const fetchCast= () => {
-    return axios.get(`${BASE_URL}genre/movie/list?api_key=${KEY}&language=${language}`)
-    .then(r => r.data.results);
-};
-
-export const fetchReviews = () => {
-    return axios.get(`${BASE_URL}genre/movie/list?api_key=${KEY}&language=${language}`)
-    .then(r => r.data.results);
-};
-
-export const fetchSearches = () => {
-    return axios.get(`${BASE_URL}genre/movie/list?api_key=${KEY}&language=${language}`)
+export const fetchSearches = (query) => {
+    return axios.get(`${BASE_URL}search/movie?api_key=${KEY}&query=${query}`)
     .then(r => r.data.results);
 };
