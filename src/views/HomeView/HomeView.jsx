@@ -6,10 +6,8 @@ import cs from "./HomeView.module.css";
 
 const HomeView = () => {
   const [movies, setMovies] = useState([]);
-  const [load, setLoad] = useState(false);
 
   useEffect(() => {
-    setLoad(!load);
     fetchTrend()
       .then((data) => setMovies(data))
       .catch((error) => toast.error("Ошибочка, извините пожалуйста"));
@@ -17,7 +15,6 @@ const HomeView = () => {
 
   return (
     <>
-      {load && <h2>Загружаю, подождите, умоляю...</h2>}
       {movies && (
         <ul>
           {movies.map(({ id, title, poster_path }) => (
